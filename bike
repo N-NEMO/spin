@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Bike {
+
+public static void main(String[] args) {
+
+    Scanner clavier = new Scanner(System.in);
+    System.out.print("Give the starting hour : ");
+    int start = clavier.nextInt();
+    System.out.print("Give the ending hour : ");
+    int finish = clavier.nextInt();
+
+    if (start < 0 || start > 24) { 
+    System.out.println("Hours must be within 0 and 24 !");
+    }
+    if (start == finish) {
+    System.out.println("Strange, you didn't take it long enough !");
+    }
+    if (start >= 24 || start > finish) {
+    System.out.println("Strange, the starting hour is after the end ...");
+    }
+    int total = finish - start;
+    if (total > 0) {
+    System.out.println("You have rented the bike for " + total + " hours.");
+    }
+//This is where it becomes complicated.
+
+    if ((start >= 0 && start < 7)||(start >= 17 && start <= 23)) {
+        System.out.println("Amount of hours in Tariff 1 is : " + ((7 - start) +(finish - 17)));
+    } else {
+        System.out.println("Amount of hours in Tariff 2 is : "
+        System.out.print("Total amount to pay is : ");
+        System.out.println(" dollars.");
+        {
+
+        }
