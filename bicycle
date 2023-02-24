@@ -1,0 +1,40 @@
+public class Bicycle {
+    private String id;
+    private String type;
+    private boolean isLocked;
+
+    public Bicycle(String id, String type) {
+        this.id = id;
+        this.type = type;
+        this.isLocked = true;
+    }
+
+    public void lock() {
+        this.isLocked = true;
+    }
+
+    public void unlock() {
+        this.isLocked = false;
+    }
+
+    public boolean isLocked() {
+        return this.isLocked;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+}
+
