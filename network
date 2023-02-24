@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class BicycleSharingNetwork {
+    private Map<String, List<Bicycle>> bicyclesByLocation;
+
+    public BicycleSharingNetwork() {
+        this.bicyclesByLocation = new HashMap<String, List<Bicycle>>();
+    }
+
+    public void addBicycle(Bicycle bicycle, String location) {
+        if (!this.bicyclesByLocation.containsKey(location)) {
+            this.bicyclesByLocation.put(location, new ArrayList<Bicycle>());
+        }
+
+        this.bicyclesByLocation.get(location).add(bicycle);
+    }
+
+    public List<Bicycle> getBicyclesAtLocation(String location) {
+        if (this.bicyclesByLocation.containsKey(location)) {
+            return this.bicyclesByLocation.get(location);
+        } else {
+            return new ArrayList<Bicycle>();
+        }
+    }
+
+    public void removeBicycle(Bicycle bicycle, String location) {
+        if (this.bicyclesByLocation.containsKey(location)) {
+            this.bicyclesByLocation.get(location).remove(bicycle);
+        }
+    }
+}
