@@ -1,0 +1,86 @@
+import java.util.*;
+public class RentalShop {
+    private String name;
+    private double latitude;
+    private double longitude;
+    private ArrayList<Bicycle> bicycles;
+
+    public RentalShop(String name, double latitude, double longitude) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.bicycles = new ArrayList<Bicycle>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public ArrayList<Bicycle> getBicycles() {
+        return bicycles;
+    }
+
+    public void setBicycles(ArrayList<Bicycle> bicycles) {
+        this.bicycles = bicycles;
+    }
+
+    public double distanceTo(double latitude, double longitude) {
+        double earthRadius = 6371; // in kilometers
+        double latDistance = Math.toRadians(latitude - this.latitude);
+        double lonDistance = Math.toRadians(longitude - this.longitude);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(this.latitude))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return earthRadius * c;
+    }
+
+    public void addBicycle(Bicycle bicycle) {
+        this.bicycles.add(bicycle);
+    }
+
+    public boolean rentBicycle(String bicycleId, int pin) {
+        for (Bicycle bicycle : bicycles) {
+            if (bicycle.getId().equals(bicycleId)) {
+                if (bicycle.isLocked()) {
+                    System.out.println("Enter the PIN code to unlock the bicycle:");
+                    Scanner scanner = new Scanner(System.in);
+                    int enteredPin = scanner.nextInt();
+                    if (enteredPin == pin) {
+                        bicycle.unlock();
+                        System.out.println("Bicycle unlocked!");
+                        return true;
+                    } else {
+                        System.out.println("Incorrect PIN code. Bicycle not unlocked.");
+                        return false;
+                    }
+                } else {
+                    System.out.println("Bicycle is already unlocked.");
+                    return false;
+                }
+            }
+        }
+        System.out.println("Bicycle not found.");
+        return false;
+    }
+}
